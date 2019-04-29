@@ -38,20 +38,41 @@
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Action</th>
             </tr>
             <%-- loop over customers --%>
             <c:forEach var="customer" items="${customers}">
+
+                <%-- construct update link with customer id --%>
+                <c:url var="updateLink" value="/customer/showUpdateForm">
+                    <c:param name="customerId" value="${customer.id}" />
+                </c:url>
+
+                <c:url var="deleteLink" value="/customer/delete">
+                    <c:param name="customerId" value="${customer.id}" />
+                </c:url>
+
+
                 <tr>
                     <th scope="row">${customer.id}</th>
                     <td>${customer.firstName}</td>
                     <td>${customer.lastName}</td>
                     <td>${customer.email}</td>
+                    <td>
+                        <a class="btn btn-warning"
+                           href="${updateLink}">Update
+                        </a>
+                         |
+                        <a class="btn btn-danger"
+                           onclick="event.preventDefault();if(!(confirm('Are you sure ypu want to delete this customer?'))){return false}
+                                    else{window.location.href = '${deleteLink}'}">Delete
+                        </a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
     </div>
 </div>
-
 
 </body>
 </html>

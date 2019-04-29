@@ -34,12 +34,40 @@ public class CustomerDAOImpl implements CustomerDAO{
   }
 
   @Override
-  public void addCustomer(Customer customer) {
+  public void saveCustomer(Customer customer) {
     // get a hibernate session
     Session currentSession = sessionFactory.getCurrentSession();
 
-    // add customer to db
-    currentSession.save(customer);
+    // use saveOrUpdate instead of save customer to db
+    // if pk is empty (null or 0) it adds new
+    // if pk is not empty, hibernate does an update
+    currentSession.saveOrUpdate(customer);
+  }
+
+  @Override
+  public Customer getCustomer(int id){
+    // get a hibernate session
+    Session currentSession = sessionFactory.getCurrentSession();
+
+    // get the customer using primary key id
+    Customer customer = currentSession.get(Customer.class, id);
+
+    return customer;
+  }
+
+  @Override
+  public void deleteCustomer(int id) {
+    // get a hibernate session
+    Session currentSession = sessionFactory.getCurrentSession();
+
+    // delete customer
+    Query query = currentSession.createQuery(
+        "delete from Customer where id=:customerId");
+
+    query.setParameter("customerId",id);
+
+    query.executeUpdate();
+
   }
 
 }

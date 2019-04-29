@@ -24,7 +24,12 @@
     <h3>Add Customer</h3>
     <br>
 
-    <form:form action="addCustomer" modelAttribute="customer" method="POST">
+    <form:form action="saveCustomer" modelAttribute="customer" method="POST">
+
+        <%-- need to associate form data with a given customer with hidden field --%>
+        <%-- calls setter for customer so right record gets updated --%>
+        <form:hidden path="id" />
+
         <table>
             <tbody>
                 <tr>
@@ -41,7 +46,7 @@
                 </tr>
                 <tr>
                     <td><label></label></td>
-                    <td><input type="submit" value="Add Customer" class="btn btn-success"></td>
+                    <td><input type="submit" value="Save Customer" class="btn btn-success"></td>
                 </tr>
                 <tr>
                     <td><label></label></td>
