@@ -24,7 +24,12 @@
         <h2>CRM - Customer Relationship Management App</h2>
     </div>
 
-    <br><br>
+    <br>
+
+    <a class="btn btn-success" href="${pageContext.request.contextPath}/customer/showAddForm">Add
+        Customer</a>
+
+    <br>
 
     <div>
         <table class="table table-dark">
